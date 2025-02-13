@@ -42,5 +42,9 @@ spath -q -e '//element/@attribute' file.xml
 
 JSON
 ```
-jq
+head <file> | jq .
+jq '.' conn.log
+jq '."id.orig_h"' conn.log | sort -u #get specific unique values
+jq 'select(.resp_ip_bytes > 40) | .resp_ip_bytes' conn.log
+#pull data from a group that is greater than 40
 ```

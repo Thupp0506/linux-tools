@@ -34,6 +34,10 @@ journal -u ssh.service
 #filtering logs since a specific time
 journalctl -u ssh.service --since "2 days ago"
 ```
+```
+cat log.txt | grep "session opened" | wc -l
+#searched in logged file
+```
 
 XML
 ```

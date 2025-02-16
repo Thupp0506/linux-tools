@@ -37,7 +37,7 @@ journalctl -u ssh.service --since "2 days ago"
 
 XML
 ```
-spath -q -e '//element/@attribute' file.xml
+xpath -q -e '//element/@attribute' file.xml
 ```
 
 JSON

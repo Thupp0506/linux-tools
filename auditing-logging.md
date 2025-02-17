@@ -490,10 +490,18 @@ ls -l /var/log
 
 # Essential syslog types locations
 
-Authentication
+Authentication (last)
 ```
 last ./var/log/wtmp
 last.*/var/log/wtmp #failed login attempts
+# -5 last five loggin sessions
+# -R hide a hostname
+# -F login and logout times with dates
+# -a display hostname in last column
+# -s yesterday -t today specific time period
+# -d ip addresses into hostnames
+# -x system down and run level changes
+# -w full user and domain names
 ```
 
 

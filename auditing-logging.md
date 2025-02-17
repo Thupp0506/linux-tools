@@ -239,6 +239,8 @@ ltrace -S lsmod
         #list symbolic link
             ls -lisa /sbin/init
         /sbin/init -> /lib/systemd/systemd
+
+
         ##list units in tree form
             systemctl list -dependenies graphical.target
         ##show wants to units
@@ -248,6 +250,7 @@ ltrace -S lsmod
         ##cat unit file
             systemctl cat graphical.target
             systemctl list-units --type=service --state=active
+            systemctl list-timers
 ```
 
 # Target units
@@ -282,7 +285,8 @@ cat /etc/systemd/system/display-manager.service
 * /sbin/init (adoptes ophaned daemons)
 
 # logging
-* /usr/sbin/rsyslogd #stardard logging binary across *nix systems
+* /usr/sbin/rsyslogd
+* stardard logging binary across *nix systems
 
 # search for sysv vs. systemd
 * One way is to check for the existence of three directories:
@@ -495,6 +499,12 @@ ls -l /var/log
 ```
 
 # Essential syslog types locations
+
+```
+sudo grep "txt" /var/log/auth.log
+sudo grep "txt" /var/log/syslog
+sudo grep "txt" /var/log/audit/audit.log
+```
 
 Authentication (last)
 ```

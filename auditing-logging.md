@@ -274,8 +274,8 @@ cat /etc/systemd/system/display-manager.service
 # persistence
 * /etc/init
 * /etc/profile
-* .bash_profile
-* .bashrc
+* /home/user/.bash_profile
+* /home/user/.bashrc
 * /etc/environment
 * rc*.d
 * daemons == services #all daemons are orphans
@@ -348,7 +348,7 @@ htop
 
 # Process Ownership
 * User ID (UID)
-    * Overarching ID (RUID will reclect this ID if something is run with different permissions)
+    * Overarching ID (RUID will reclect this ID if something is run with             different permissions)
 * Effective User ID (EUID)
     * user whose file access permissions are used by the process
 * Real User ID (RUID)
@@ -384,10 +384,6 @@ htop
 * Daemons
     * intentionally orphaned process in order to have a background process
     * purpose: manage services: {start,stop,restart}
-```
-man -cron
-#daemons that starts during the boot process
-```
 
 # Interacting with linux Services
 * sysv

@@ -426,22 +426,23 @@ crontab -e -u [user] This command will edit user’s crontab contents
 ```
 sudo lsof | tail -30
 sudo lsof -c sshd (list open files for a specific process)
+lsof -p 49728 #search by pid
+lsof -i tcp:50537 -P -R #search by specific port
 ```
 
 * Interpretting File Descriptors
   * # - The number in front of flag(s) is the file descriptor number used by the process                 associated with the file
-    u - File open with Read and Write permission
-    r - File open with Read permission
-    w - File open with Write permission
-    W - File open with Write permission and with Write Lock on entire file
-    mem - Memory mapped file, usually for share library
+   * u - File open with Read and Write permission
+   * r - File open with Read permission
+   * w - File open with Write permission
+   * W - File open with Write permission and with Write Lock on entire file
+   * mem - Memory mapped file, usually for share library
 
 # Navigating Proc Directory
 ```
 ls -l /proc/
 ls -l /proc/<PID>
 ```
-# grep -w / -e '/bin/apache3 -lp 443' 2>/dev/null
 
 
 # Linux Process Find Evil 3

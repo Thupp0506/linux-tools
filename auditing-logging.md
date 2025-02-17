@@ -516,6 +516,10 @@ journal -u ssh.service
 
 #filtering logs since a specific time
 journalctl -u ssh.service --since "2 days ago"
+
+#show all of the available values for a given journal field
+journalctl -F _UID
+journalctl -F _GID
 ```
 ```
 cat log.txt | grep "session opened" | wc -l
@@ -525,8 +529,24 @@ cat log.txt | grep "session opened" | wc -l
 XML
 ```
 xpath -q -e '//element/@attribute' file.xml
-xpath -q -e '
 ```
+  # Linux Auditing and Logging XML 3
+  * Parse all of the IP addresses from the file using XPATH queries
+    ```
+    xpath -e /nmaprun/host/address/@addr output.xml
+    ```
+  # Linux Auditing and Logging XML 4
+  *Select all of the IP addresses and ports using a single XPATH Union Statement
+    ```
+    xpath -e '/nmaprun/host/address/@addr | /nmaprun/host/ports/port/@portid' output.xml
+    ```
+  # Linux Auditing and Logging XML 5
+  * Select every IP address with open (in use) ports using XPATH queries and XPATH axes.
+    ```
+    xpath -e '//host[ports/port/state/@state="open"]/address/@addr | //host[ports/port/state/@state="open"]/ports/port/@portid' output.xml
+    ```
+
+    
 
 JSON
 ```

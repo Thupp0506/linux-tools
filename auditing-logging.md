@@ -6,7 +6,7 @@ whoami , who , w
 ip addr , ifconfig
 ip neigh , arp
 ip route , route
-ss , netstat
+ss -tuln , netstat -tuln
 nft list tables , iptables -L 
 sudo -l
 ```
@@ -247,6 +247,7 @@ ltrace -S lsmod
             systemctl list-unit-files
         ##cat unit file
             systemctl cat graphical.target
+            systemctl list-units --type=service --state=active
 ```
 
 # Target units
@@ -297,6 +298,8 @@ ps -elf # view running processes
         -e #Displays every process on the system
         -l #Lists processes in a long format
         -f #Does a full-format listing
+
+ps aux #process running as root
 
 ps --ppid 2 -lf
     #Displays only kthreadd processes (so, only kernel-space processes)
@@ -402,6 +405,11 @@ systemctl status <PID of service
   * /var/spool/cron
   * /etc/cron.d
   * /etc/crontab (system cron jobs performed as root)
+```
+sudo cat /etc/crontab
+sudo ls /etc/cron.d
+sudo ls /var/spool/cron/crontabs
+```
 
 * System cron jobs
     * run as root
@@ -428,6 +436,7 @@ sudo lsof | tail -30
 sudo lsof -c sshd (list open files for a specific process)
 lsof -p 49728 #search by pid
 lsof -i tcp:50537 -P -R #search by specific port
+lsof -i #processes using network resources
 ```
 
 * Interpretting File Descriptors

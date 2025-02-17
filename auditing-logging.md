@@ -525,6 +525,7 @@ cat log.txt | grep "session opened" | wc -l
 XML
 ```
 xpath -q -e '//element/@attribute' file.xml
+xpath -q -e '
 ```
 
 JSON
@@ -535,3 +536,11 @@ jq '."id.orig_h"' conn.log | sort -u #get specific unique values
 jq 'select(.resp_ip_bytes > 40) | .resp_ip_bytes' conn.log
 #pull data from a group that is greater than 40
 ```
+
+# Linux Auditing and Logging Whut 2
+* What is the total amount of time users were logged into the machine?
+* Flag format: #h,#m (Replace the # with a number)
+```
+cat log.txt | last | grep -v reboot | grep -v 'still logged in' | sort -k2M -k3n -k4
+```
+

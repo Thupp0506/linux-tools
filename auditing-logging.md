@@ -489,11 +489,22 @@ systemctl -all
 #found vestrisecreta.service because the description is the same thing
 
 systemctl status vestrisecreta.service
-#loaded (/lib/systemd/system/vestrisecreta.service;)
 cd /lib/systemd/system
 cat vestrisecreta.service
+     Description=Secrets
+     After=network.target auditd.service
+     
+     [Service]
+     Type=oneshot
+     ExecStart=/bin/bash -c 'find /home -name \*.txt -exec cp {} /tmp \;'
+     Restart=no
+     
+     [Install]
+     WantedBy=multi-user.target
+     Alias=vestrisecreta.service
 
-
+#answer: find /home -name \*.txt -exec cp {} /tmp \;,vestrisecreta.service
+```
 
 
 # Syslog Daemon

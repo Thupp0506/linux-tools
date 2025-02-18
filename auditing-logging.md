@@ -80,6 +80,8 @@ grep
 # search strings in a file
 # -v to filter out specific string
 
+grep / -rw -e '/bin/bash -c find /home -name \*.txt -exec cp {} /tmp \' 2>/dev/null
+
 ##Identify heresy by comparing the Inquisition_Targets file to members of the guardsmen group.
 grep -Ff <(sort <file of targets>) <cat /etc/group | grep <group> | awk -F ':' '{print $4}' | sed -e $'s/,/\\\n/g')
 ```
@@ -477,6 +479,21 @@ ls
 
 cat whatischaos.time
 ```
+
+# Linux Process Find Evil 2
+* Scenario: Someone or something is stealing files with a .txt extension from user directories. Determine how these thefts are occurring.
+* Task: Identify the command being ran and how it occurs.
+* Flag format: command,how it occurs
+```
+systemctl -all
+#found vestrisecreta.service because the description is the same thing
+
+systemctl status vestrisecreta.service
+#loaded (/lib/systemd/system/vestrisecreta.service;)
+cd /lib/systemd/system
+cat vestrisecreta.service
+
+
 
 
 # Syslog Daemon

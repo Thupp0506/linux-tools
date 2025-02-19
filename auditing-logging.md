@@ -97,7 +97,14 @@ cat /etc/passwd | awk -F ':' '{print$1,$3,$4}'
 awk 'NR==420,NR==1337' <file> #outputs lines 420-1337
 sudo cat /etc/shadow |awk -F[:$] '$1 == "root" {print $5}' | wc
 ```
-
+# Linux Basics Reformat2
+* Use awk to create a separate CSV (comma separated value) file that contains columns 1-6.
+* The flag is an MD5 hash of the new file
+* Hint: Look at #fields on line 6 in the file to understand column layout.
+* Hint: This is a Zeek (formally known as Bro) connection log file in TSV format. Click This Link to learn about its formatting.
+```
+awk -F "\t" -v OFS="," '{print $1,$2,$3,$4,$5,$6}' connections | md5sum
+```
 SED
 * manipulates output does not change the file, instead of filtering or formatting
 ```

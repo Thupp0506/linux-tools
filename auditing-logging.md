@@ -105,6 +105,22 @@ sudo cat /etc/shadow |awk -F[:$] '$1 == "root" {print $5}' | wc
 ```
 awk -F "\t" -v OFS="," '{print $1,$2,$3,$4,$5,$6}' connections | md5sum
 ```
+# Linux Basics Bash Logic2
+* The flag resides in $HOME/paths... you just need to determine which flag it is. The flag sits next to a string matching the name of a $PATH/binary on your system.
+* Hint: The correct binary is not echo
+* Hint: Compare the contents
+```
+cd /home/garviel
+ls #find paths
+echo $PATH
+ls <every directory in $PATH> >> binary.txt
+comm -1 -2 <(awk -F " " '{print $1}' paths | sort) <(sort binary.txt)
+#echo
+#python
+cat paths | grep python3
+#python3    flag:{  Vrc0vw7ZUaLBpQp  }
+```
+
 SED
 * manipulates output does not change the file, instead of filtering or formatting
 ```
@@ -608,10 +624,51 @@ jq 'select(.resp_ip_bytes > 40) | .resp_ip_bytes' conn.log
 #pull data from a group that is greater than 40
 ```
 
+
+# Linux Auditing and Logging Whut 1
+* Use the log file attached to this for all Whut questions.
+* How many unique users logged into this machine?
+```
+cat log.txt | grep "login"
+```
 # Linux Auditing and Logging Whut 2
 * What is the total amount of time users were logged into the machine?
 * Flag format: #h,#m (Replace the # with a number)
 ```
-cat log.txt | last | grep -v reboot | grep -v 'still logged in' | sort -k2M -k3n -k4
+cat log.txt | grep "user"
+cat log.txt | grep "session opened"
+cat log.txt | grep "Disconnected"
+
+#Frodo 1h,15m
+#Balrog 0h,56m
+#Saruman 20m
+#saruman 2h, 43m
 ```
 
+# Linux Auditing and Logging Whut 4
+* Challenge only allows ONE attempt
+* What user successfully executed commands?
+```
+cat log.txt | grep /bin/
+# found Apr 6 13:35:51 linux-opstation-7qhp sudo: Saruman : TTY=pts/0 ; PWD=/home/Saruman ; USER=root ; COMMAND=find /etc/passwd -exec /bin/sh {} ;\
+```
+# Linux Auditing and Logging Whut 5
+* Analyze the file to determine when a shell was spawned as a different user and how long it was maintained for.
+* Provide the :
+* duration the shell was maintained
+* the command used to create it
+* number of times they [successfully] escalated
+* Flag Format: #h,#m,command,number of times
+* Round minutes up to the closest number divisible by 10.
+```
+cat log.txt | grep Saruman
+#!!!!RUN THE COMMANDS TO SEE WHICH ONES WORKED!!!!
+#Apr 6 14:15:01 linux-opstation-7qhp sudo: Saruman : TTY=pts/0 ; PWD=/home/Saruman ; USER=root ; COMMAND=find /etc/passwd -exec /bin/sh \;
+#Apr 6 14:15:02 linux-opstation-7qhp sudo: pam_unix(sudo:session): session opened for user root by Saruman(uid=0)
+#Apr 6 14:15:20 linux-opstation-7qhp systemd: pam_unix(systemd-user:session): session opened for user Saruman by (uid=0)
+#Apr 6 14:15:21 linux-opstation-7qhp sudo: Saruman : TTY=pts/0 ; PWD=/home/Saruman ; USER=root ; COMMAND=find /etc/passwd -exec /bin/sh \;
+#Apr 6 14:15:22 linux-opstation-7qhp sudo: pam_unix(sudo:session): session opened for user root by Saruman(uid=0)
+#Apr 6 16:43:21 linux-opstation-7qhp[3915]: Disconnected from user Saruman 12.100.80.12 port 9875
+
+#2h,30m,COMMAND=find /etc/passwd -exec /bin/sh \;,2
+```

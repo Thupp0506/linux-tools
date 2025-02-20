@@ -1,3 +1,39 @@
+# persistence
+* /etc/environment
+    * variables accessible to every user, changes require restart
+* /etc/profile
+    * script that executes whenever a user logs into an interactive shell
+    * when file is modified logging out, will apply the changes
+* /home/<user>/.bash_profile | /home/<user>/.bashrc
+    * execute on per user basis, interactive logins only
+    * .bash_profile - bash script that executes when a user invokes an interactive login             shell (prompted for a password)
+    * .bashrc executes non-login shell is invoked
+      ```
+      cd $HOME
+      echo "echo 'Im in `~/.profile`'" >> .profile
+      ```
+* rc*.d
+    * kernel once loaded reaches out and execute /sbin/init
+         * SysV -
+             * **/etc/init** -> then init reads -> **/etc/inittab** -> processes at each run                 level defined in /etc/rc*.d
+         * Systemd -
+             * **/sbin/init** -> symbolically linked to -> **/lib/systemd/system** |                           **/lib/systemd/systemd** -> *systemd* interacts with flat config file called                   units.
+             * /sbin/init (adoptes ophaned daemons)
+             * target and service units determine system initialization
+             * target.unit want and requires dependencies search locations:
+                  * /etc/systemd/system/*
+                  * /lib/systemd/system/*
+                  * /run/systemd/generator/*
+            
+* daemons == services #all daemons are orphans
+     * Kernel processes -> [kthreadd] -> PID 2
+     * User processes -> /sbin/init -> PID 1
+* Cron Jobs
+    * System jobs -> run as root -> controlled by **/etc/crontab**
+    * User jobs -> 'crontab' to create -> stored in **/var/spool/cron/crontabs/**
+
+
+  
 # Linux essentials
 ```
 hostname
@@ -299,16 +335,6 @@ cat /etc/systemd/system/display-manager.service
       * .bash_profile -> interactive login shell
       * bashrc -> non-login shell (not prompted for creds)
 
-
-# persistence
-* /etc/init
-* /etc/profile
-* /home/user/.bash_profile
-* /home/user/.bashrc
-* /etc/environment
-* rc*.d
-* daemons == services #all daemons are orphans
-* /sbin/init (adoptes ophaned daemons)
 
 # logging
 * /usr/sbin/rsyslogd

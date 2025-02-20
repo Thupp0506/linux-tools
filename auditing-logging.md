@@ -4,7 +4,7 @@
 * /etc/profile
     * script that executes whenever a user logs into an interactive shell
     * when file is modified logging out, will apply the changes
-* /home/<user>/.bash_profile | /home/<user>/.bashrc
+* /home/user/.bash_profile | /home/user/.bashrc
     * execute on per user basis, interactive logins only
     * .bash_profile - bash script that executes when a user invokes an interactive login             shell (prompted for a password)
     * .bashrc executes non-login shell is invoked

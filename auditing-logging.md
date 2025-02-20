@@ -134,6 +134,7 @@ REGEX
 cat <file> | grep -P '^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$'  ## regex for ip address
 cat <file> | grep -P '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
 cat <file> | grep -P '^([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}$' #for mac addresses
+cat numbers | grep -P '^([0-9A-Fa-f]{1}([02468AaCcEe][:-]){1}){1}([0-9A-Fa-f]{2}[:-]){4}[0-9A-Fa-f]{2}$' | wc -l #locally and universally administered unicast MAC
 cat numbers | grep -P '(^([0-7]{1}[0-9a-fA-F]{1})[:.-]?([0-9a-fA-F]{2}[:.-]?){4}[0-9a-fA-F]{2}$)|(^([89abcedf]{1}[0-9a-fA-F]{1})[:.-]?([0-9a-fA-F]{2}[:.-]?){4}[0-9a-fA-F]{2}$)'
 ```
 

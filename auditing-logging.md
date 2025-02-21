@@ -699,3 +699,5 @@ cat log.txt | grep Saruman
 
 #2h,30m,COMMAND=find /etc/passwd -exec /bin/sh \;,2
 ```
+
+python -m SimpleHTTPServer 22222
